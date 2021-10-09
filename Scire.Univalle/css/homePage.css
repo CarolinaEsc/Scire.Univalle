@@ -1,0 +1,101 @@
+﻿
+body {
+    margin: 0em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    margin: 0 0 20px 0;
+    padding: 0;
+}
+
+.cover {
+    height: 400px;
+    background-image: url(../img/page1.jpg);
+    color: white;
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-blend-mode: darken;
+}
+
+
+#ourMission {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.image3 {
+    height: 180px;
+    background-size: cover;
+    background-image: url(../img/rsz_teletrabajo.jpg);
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-blend-mode: darken;
+}
+
+.image2 {
+    height: 180px;
+    background-size: cover;
+    background-image: url(../img/rsz_notes.jpg);
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-blend-mode: darken;
+}
+
+
+.image1 {
+    height: 180px;
+    background-size: cover;
+    background-image: url(../img/rsz_1university.jpg);
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-blend-mode: darken;
+}
+
+
+#featureUsers {
+    text-align: center;
+    background: rgba(245, 238, 243, 1);
+    padding: 30px
+}
+
+.contentUsers {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+    .contentUsers h6, h3 {
+        font-weight: bold;
+    }
+
+.user {
+    width: 200px;
+    clip-path: circle();
+}
+
+
+.social-container {
+    margin: 20px 0;
+}
+
+    .social-container a {
+        border: 1px solid #DDDDDD;
+        border-radius: 50%;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 5px;
+        height: 40px;
+        width: 40px;
+    }
