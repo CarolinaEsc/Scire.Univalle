@@ -21,12 +21,13 @@
 
     <!-- Main Stylesheet File -->
     <link href="~/css/homePage.css" rel="stylesheet">
+    <script src="~/js/loginScript.js"></script>
 </head>
 
 <body>
 
     <header>
-         @RenderPage("_header.cshtml")
+        <!-- RenderPage("_header.cshtml") -->
         <div class="cover d-flex justify-content-center align-items-center flex-column">
 
             <h1>
@@ -162,9 +163,10 @@
                     </div>
                 </div>
             </div>
+            <a href="~/loginSignup.cshtml"> login</a>
         </section>
 
-        @RenderPage("_footer.cshtml")
+       <!-- RenderPage("_footer.cshtml") -->
     </main>
-</body>
-</html>
+    </body>
+    </html>
