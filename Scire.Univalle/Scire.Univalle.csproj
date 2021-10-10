@@ -86,6 +86,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+
     <Content Include="css\footer.css" />
     <Content Include="css\homePage.css" />
     <Content Include="icons\facebook.png" />
@@ -115,7 +116,10 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+
     <Content Include="_footer.cshtml" />
+    <Content Include="_header.cshtml" />
+
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
