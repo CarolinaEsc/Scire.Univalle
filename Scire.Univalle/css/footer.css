@@ -1,0 +1,44 @@
+﻿/* footer */
+
+.footer {
+    color: black;
+}
+
+.icon {
+    margin-left: 20px;
+    width: 30px;
+    height: 30px;
+}
+
+.spanCopy {
+    margin-left: 30px;
+}
+
+.terms {
+    margin-left: 20px;
+}
+
+#social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#description {
+    margin-left: 50px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#section1 {
+    background-color: rgba(173,20,68,255);
+}
+
+#copyright {
+    background-color: dimgrey;
+}
+
+#conditions {
+    color: white;
+    text-decoration: none;
+}
