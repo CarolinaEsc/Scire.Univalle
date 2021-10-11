@@ -1,35 +1,69 @@
 ﻿@using System.Text.RegularExpressions
 @{
-    Validation.Add("txtemail", Validator.Regex(@"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", "Email incorrecto"));
+    Validation.Add("emailUp", Validator.Regex(@"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", "Email incorrecto"));
     Validation.Add("passwordConfirmUP", Validator.EqualsTo("passwordUP", "Las contraseñas no coinciden"));
+    Validation.Add("passwordUP", Validator.Regex(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", "Mninimo 8 caracteres. Agrege un numero"));
 
+
+    var email = Request["emailUp"];
+    var Name = Request.Form["nameUp"];
+    var Lastname = Request.Form["lastnameUP"];
+    var Password = Request.Form["passwordUP"];
+    var PasswordConfirm = Request.Form["passwordConfirmUP"];
+    var message = "";
     if (IsPost)
     {
-        var email = Request["emailUp"];
-        var Name = Request.Form["nameUp"];
-        var Lastname = Request.Form["lastnameUP"];
-        var Password = Request.Form["passwordUP"];
-        var PasswordConfirm = Request.Form["passwordConfirmUP"];
+
         if (Validation.IsValid())
         {
             var db = Database.Open("connectionString");
-            try {
+            try
+            {
                 if (Regex.IsMatch(email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@est\.univalle\.edu?)\Z"))
                 {
                     //Estudiante
+                    var query = db.Query("SELECT email FROM Person WHERE email='" + email + "'");
+                    if (query.Count() == 0)
+                    {
 
-
-                    var insertQuery = "INSERT INTO Person(name, lastName, email, password, role) VALUES (@0,@1,@2, HashBytes('md5',@3),@4)";
-                    db.Execute(insertQuery, Name.ToString().ToUpper(), Lastname.ToString().ToUpper(), email, PasswordConfirm, "ESTUDIANTE");
+                        var insertQuery = "INSERT INTO Person(name, lastName, email, password, role) VALUES (@0,@1,@2, HashBytes('md5',@3),@4)";
+                        db.Execute(insertQuery, Name.ToString().ToUpper(), Lastname.ToString().ToUpper(), email, PasswordConfirm, "ESTUDIANTE");
+                        Response.Redirect("signin");
+                    }
+                    else
+                    {
+                        <script>
+                            window.alert("Email existente");
+                        </script>
+                    }
                 }
                 else if (Regex.IsMatch(email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@univalle\.edu?)\Z"))
                 {
                     //Docente
-                    var insertQuery = "INSERT INTO Person(name, lastName, email, password, role) VALUES (@0,@1,@2, HashBytes('md5',@3),@4)";
-                    db.Execute(insertQuery, Name.ToString().ToUpper(), Lastname.ToString().ToUpper(), email, PasswordConfirm, "DOCENTE");
-
+                    var query = db.Query("SELECT email FROM Person WHERE email='" + email + "'");
+                    System.Diagnostics.Debug.WriteLine(query.Count());
+                    if (query.Count() == 0)
+                    {
+                        var insertQuery = "INSERT INTO Person(name, lastName, email, password, role) VALUES (@0,@1,@2, HashBytes('md5',@3),@4)";
+                        db.Execute(insertQuery, Name.ToString().ToUpper(), Lastname.ToString().ToUpper(), email, PasswordConfirm, "DOCENTE");
+                        Response.Redirect("signin");
+                    }
+                    else
+                    {
+                        <script>
+                            window.alert("Email existente");
+                        </script>
+                    }
                 }
-            } catch(Exception ex) {
+                else
+                {
+                    <script>
+                        window.alert("Ingrese su correo institucional Univalle");
+                    </script>
+                }
+            }
+            catch (Exception ex)
+            {
 
             }
             finally
@@ -38,9 +72,7 @@
             }
 
         }
-
     }
-
 
 }
 
@@ -64,16 +96,20 @@
         <div class="container right-panel-active" id="container">
             <!--******** SIGN UP *********-->
             <div class="form-container sign-up-container ">
-                <form id="form" action="#" method="post">
+
+                <form id="form" action="" method="post">
                     <h1>Crear cuenta</h1>
-                    <span>
-                        Registrate usando tu correo <br />
+                    <span style="margin:2px; color:red; font-weight:400">
+                        Registrate usando tu correo institucional Univalle<br />
+
                     </span>
-                    <input type="text" name="nameUP" placeholder="Nombre" onkeyup="convertupper()" id="name" required />
-                    <input typeof="text" name="lastnameUP" placeholder="Apellido" id="lastname" required />
-                    <input type="email" name="emailUp" placeholder="Correo" id="email" required />
-                    <input type="password" name="passwordConfirmUP" placeholder="Confirme su contraseña" id="passwordConfirm" required />
-                    <span class="msg" id="msg"></span>
+                    <input type="text" name="nameUP" value=@Name placeholder="Nombre" onkeyup="convertupper()" id="name" required />
+                    <input typeof="text" name="lastnameUP" value=@Lastname placeholder="Apellido" id="lastname" onkeyup="convertupper()" required />
+                    <input type="email" name="emailUp" value=@email placeholder="Correo" id="email" required />
+                    <input type="password" name="passwordUP" value=@Password placeholder="Contraseña" id="password" required />
+                    <input type="password" name="passwordConfirmUP" value=@PasswordConfirm placeholder="Confirme su contraseña" id="passwordConfirm" required />
+                    <p style="margin:2px; color:red; font-weight:400">@Html.ValidationMessage("passwordConfirmUP")</p>
+                    <p style="margin:2px; color:red; font-weight:400">@Html.ValidationMessage("passwordUP")</p>
                     <button type="submit" name="btnSignUp">Registrarse</button>
                     <label>
                 </form>

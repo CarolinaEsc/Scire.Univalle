@@ -1,44 +1,46 @@
 ﻿@using System.Text.RegularExpressions
 @{
-
+    var emailIn = Request["emailIN"];
+    var Password = Request.Form["passwordIN"];
     var menssage = "";
     Validation.Add("txtemail", Validator.Regex(@"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", "Email incorrecto"));
     Validation.Add("passwordConfirmUP", Validator.EqualsTo("passwordUP", "Las contraseñas no coinciden"));
 
     if (IsPost)
     {
-        var emailIn = Request["emailIN"];
-            if (Validation.IsValid())
+
+        if (Validation.IsValid())
+        {
+            var db = Database.Open("connectionString");
+
+            var query = db.Query("SELECT name, lastname, role, email, [password] FROM Person WHERE email='" + emailIn + "' AND [password] = HashBytes('md5','" + Password + "')");
+            List<string> user = new List<string>();
+            foreach (var u in query)
             {
-                //Estudiante
-                var db = Database.Open("connectionString");
-
-                var Password = Request.Form["passwordIN"];
-
-                var query = db.Query("SELECT name, lastname, role, email, [password] FROM Person WHERE email='" + emailIn + "' AND [password] = HashBytes('md5','" + Password + "')");
-                List<string> user = new List<string>();
-                foreach (var u in query)
-                {
-                    user.Add(u.name);
-                    user.Add(u.lastname);
-                    user.Add(u.role);
-                    user.Add(u.email);
-                }
-
-                if (query.Count() > 0)
-                {
-                    Session.Add("name", user[0]);
-                    Session.Add("lastname", user[1]);
-                    Session.Add("role", user[2]);
-                    Session.Add("email", user[3]);
-                    Response.Redirect("~/index");
-                }
-                else
-                {
-                    menssage = "Usuario no existente";
-                }
+                user.Add(u.name);
+                user.Add(u.lastname);
+                user.Add(u.role);
+                user.Add(u.email);
             }
-        
+
+            if (query.Count() > 0)
+            {
+
+                System.Diagnostics.Debug.WriteLine("aqui");
+                Session.Add("name", user[0]);
+                Session.Add("lastname", user[1]);
+                Session.Add("role", user[2]);
+                Session.Add("email", user[3]);
+                Response.Redirect("index");
+            }
+            else
+            {
+                <script>
+                    window.alert("Email o contraseña incorrectos");
+                </script>
+            }
+        }
+
     }
 
 
@@ -67,11 +69,11 @@
         <div class="container" id="container">
             <!--******** SIGN IN *********-->
             <div class="form-container sign-in-container">
-                <form id="form" action="#" method="post">
+                <form id="form" action="" method="post">
                     <h1>Ingresar</h1>
                     <span>Ingresa con tu correo</span>
-                    <input type="email" name="emailIN" placeholder="Correo" required />
-                    <input type="password" name="passwordIN" placeholder="Contraseña" required id="pwd" onkeyup="validatePassword(this.value);" />
+                    <input type="email" name="emailIN" value=@emailIn placeholder="Correo" required />
+                    <input type="password" name="passwordIN" value=@Password placeholder="Contraseña" required id="pwd" />
                     <span class="msg" id="msg">@menssage</span>
                     <a href="#">Olvido su contraseña?</a>
                     <button type="submit" name="btnSignIn">Ingresar</button>
@@ -85,7 +87,7 @@
 
                         <p> Ha pasado mucho tiempo </p>
                         <button class="ghost" id="signUp" onclick="openSignUp()" type="submit">Registrarse</button>
-                        
+
                     </div>
                 </div>
             </div>
