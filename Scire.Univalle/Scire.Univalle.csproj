@@ -44,7 +44,8 @@
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-      <Private>True</Private>
+
+    <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -87,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
 
+    <Content Include="css\login.css" />
     <Content Include="css\footer.css" />
     <Content Include="css\homePage.css" />
     <Content Include="icons\facebook.png" />
@@ -96,12 +98,14 @@
     <Content Include="icons\user.png" />
     <Content Include="icons\youtube.png" />
     <Content Include="img\page1.jpg" />
+    <Content Include="img\portait.jpg" />
     <Content Include="img\rsz_1university.jpg" />
     <Content Include="img\rsz_notes.jpg" />
     <Content Include="img\rsz_teletrabajo.jpg" />
     <Content Include="img\rsz_user2.jpg" />
     <Content Include="img\rsz_user3.jpg" />
     <Content Include="img\rsz_user4.jpg" />
+    <Content Include="js\loginScript.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.cshtml" />
+    <Content Include="loginSignup.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
