@@ -16,49 +16,58 @@
         .na {
             background-color: #9e0044;
         }
-        .a{
-            color:white;
+
+        #header {
+            height: 92px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            transition: all 0.5s;
+            z-index: 997;
         }
     </style>
 </head>
 <body>
-    <nav class="na navbar navbar-expand-xl navbar-light d-flex text-white justify-content-center align-items-center flex-column">
-        <h1 class="navbar-brand text-white">SCIRE - UNIVALLE</h1>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Inicio</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Estudiantes
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Apuntes de estudiantes</a>
-                        <a class="dropdown-item" href="#">Option2</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Option3</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Materias
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Bibliografías</a>
-                        <a class="dropdown-item" href="#">Option2</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Option3</a>
-                    </div>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0" action="~/loginSignup.cshtml">
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Iniciar sesión</button>
-            </form>
-            <form class="form-inline my-2 my-lg-0" action="~/loginSignup.cshtml">
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Registrarse</button>
-            </form>
-        </div>
-    </nav>
+    <header id="header">
+        <nav class="na navbar navbar-expand-xl navbar-light d-flex text-white justify-content-center align-items-center flex-column">
+            <h1 class="navbar-brand text-white">SCIRE - UNIVALLE</h1>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active light">
+                        <a class="nav-link light" href="#" style="color:white">Inicio</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" style="color:white" aria-haspopup="true" aria-expanded="false">
+                            Estudiantes
+                        </a>
+                        <div class="dropdown-menu op" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Apuntes de estudiantes</a>
+                            <a class="dropdown-item" href="#">Option2</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Option3</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle op" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" style="color:white" aria-haspopup="true" aria-expanded="false">
+                            Materias
+                        </a>
+                        <div class="dropdown-menu op" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Bibliografías</a>
+                            <a class="dropdown-item" href="#">Option2</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Option3</a>
+                        </div>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" action="~/loginSignup.cshtml">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Iniciar sesión</button>
+                </form>
+                <form class="form-inline my-2 my-lg-0" action="~/loginSignup.cshtml">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Registrarse</button>
+                </form>
+            </div>
+        </nav>
+    </header>
 </body>
 </html>
