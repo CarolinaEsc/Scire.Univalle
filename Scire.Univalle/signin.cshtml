@@ -1,0 +1,95 @@
+﻿@using System.Text.RegularExpressions
+@{
+
+    var menssage = "";
+    Validation.Add("txtemail", Validator.Regex(@"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", "Email incorrecto"));
+    Validation.Add("passwordConfirmUP", Validator.EqualsTo("passwordUP", "Las contraseñas no coinciden"));
+
+    if (IsPost)
+    {
+        var emailIn = Request["emailIN"];
+            if (Validation.IsValid())
+            {
+                //Estudiante
+                var db = Database.Open("connectionString");
+
+                var Password = Request.Form["passwordIN"];
+
+                var query = db.Query("SELECT name, lastname, role, email, [password] FROM Person WHERE email='" + emailIn + "' AND [password] = HashBytes('md5','" + Password + "')");
+                List<string> user = new List<string>();
+                foreach (var u in query)
+                {
+                    user.Add(u.name);
+                    user.Add(u.lastname);
+                    user.Add(u.role);
+                    user.Add(u.email);
+                }
+
+                if (query.Count() > 0)
+                {
+                    Session.Add("name", user[0]);
+                    Session.Add("lastname", user[1]);
+                    Session.Add("role", user[2]);
+                    Session.Add("email", user[3]);
+                    Response.Redirect("~/index");
+                }
+                else
+                {
+                    menssage = "Usuario no existente";
+                }
+            }
+        
+    }
+
+
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link href="~/css/login.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+        function openSignUp() {
+            window.location.href = "signup.cshtml";
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <h2> BIENVENIDO A SCIRE UNIVALLE </h2>
+        <div class="container" id="container">
+            <!--******** SIGN IN *********-->
+            <div class="form-container sign-in-container">
+                <form id="form" action="#" method="post">
+                    <h1>Ingresar</h1>
+                    <span>Ingresa con tu correo</span>
+                    <input type="email" name="emailIN" placeholder="Correo" required />
+                    <input type="password" name="passwordIN" placeholder="Contraseña" required id="pwd" onkeyup="validatePassword(this.value);" />
+                    <span class="msg" id="msg">@menssage</span>
+                    <a href="#">Olvido su contraseña?</a>
+                    <button type="submit" name="btnSignIn">Ingresar</button>
+                </form>
+            </div> <!--Sign in-->
+
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-right">
+                        <h1>Bienvenido de nuevo!</h1>
+
+                        <p> Ha pasado mucho tiempo </p>
+                        <button class="ghost" id="signUp" onclick="openSignUp()" type="submit">Registrarse</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

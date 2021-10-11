@@ -47,8 +47,7 @@
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-
-    <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -103,7 +102,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-
     <Content Include="css\login.css" />
     <Content Include="css\footer.css" />
     <Content Include="css\homePage.css" />
@@ -129,18 +127,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.cshtml" />
-    <Content Include="loginSignup.cshtml" />
     <None Include="packages.config" />
+    <Content Include="signup.cshtml" />
+    <Content Include="signin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-
     <Content Include="_footer.cshtml" />
     <Content Include="_header.cshtml" />
-
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

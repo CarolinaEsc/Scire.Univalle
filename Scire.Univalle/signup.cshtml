@@ -1,0 +1,96 @@
+﻿@using System.Text.RegularExpressions
+@{
+    Validation.Add("txtemail", Validator.Regex(@"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", "Email incorrecto"));
+    Validation.Add("passwordConfirmUP", Validator.EqualsTo("passwordUP", "Las contraseñas no coinciden"));
+
+    if (IsPost)
+    {
+        var email = Request["emailUp"];
+        var Name = Request.Form["nameUp"];
+        var Lastname = Request.Form["lastnameUP"];
+        var Password = Request.Form["passwordUP"];
+        var PasswordConfirm = Request.Form["passwordConfirmUP"];
+        if (Validation.IsValid())
+        {
+            var db = Database.Open("connectionString");
+            try {
+                if (Regex.IsMatch(email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@est\.univalle\.edu?)\Z"))
+                {
+                    //Estudiante
+
+
+                    var insertQuery = "INSERT INTO Person(name, lastName, email, password, role) VALUES (@0,@1,@2, HashBytes('md5',@3),@4)";
+                    db.Execute(insertQuery, Name.ToString().ToUpper(), Lastname.ToString().ToUpper(), email, PasswordConfirm, "ESTUDIANTE");
+                }
+                else if (Regex.IsMatch(email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@univalle\.edu?)\Z"))
+                {
+                    //Docente
+                    var insertQuery = "INSERT INTO Person(name, lastName, email, password, role) VALUES (@0,@1,@2, HashBytes('md5',@3),@4)";
+                    db.Execute(insertQuery, Name.ToString().ToUpper(), Lastname.ToString().ToUpper(), email, PasswordConfirm, "DOCENTE");
+
+                }
+            } catch(Exception ex) {
+
+            }
+            finally
+            {
+                db.Close();
+            }
+
+        }
+
+    }
+
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link href="~/css/login.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        function openSignIn() {
+            window.location.href = "signin.cshtml";
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <h2> BIENVENIDO A SCIRE UNIVALLE </h2>
+        <div class="container right-panel-active" id="container">
+            <!--******** SIGN UP *********-->
+            <div class="form-container sign-up-container ">
+                <form id="form" action="#" method="post">
+                    <h1>Crear cuenta</h1>
+                    <span>
+                        Registrate usando tu correo <br />
+                    </span>
+                    <input type="text" name="nameUP" placeholder="Nombre" onkeyup="convertupper()" id="name" required />
+                    <input typeof="text" name="lastnameUP" placeholder="Apellido" id="lastname" required />
+                    <input type="email" name="emailUp" placeholder="Correo" id="email" required />
+                    <input type="password" name="passwordConfirmUP" placeholder="Confirme su contraseña" id="passwordConfirm" required />
+                    <span class="msg" id="msg"></span>
+                    <button type="submit" name="btnSignUp">Registrarse</button>
+                    <label>
+                </form>
+            </div>
+
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+
+                        <h1>Hola, Amigo!</h1>
+
+                        <p>Adentrate en nuestra comunidad</p>
+                        <button class="ghost" id="signIn" type="submit" onclick="openSignIn()">Ingresar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

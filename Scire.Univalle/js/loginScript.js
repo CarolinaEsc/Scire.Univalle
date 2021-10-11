@@ -1,42 +1,4 @@
-﻿/*jshint esversion: 6 */
-/* JS to implement panel */
-
-window.onload = function () {
-    const signUpButton = document.getElementById('signUp');
-    const signInButton = document.getElementById('signIn');
-    const container = document.getElementById('container');
-
-
-    if (signUpButton) {
-        signUpButton.addEventListener('click', () => {
-            container.classList.add("right-panel-active");
-            console.log("hola bb");
-        });
-    }
-
-    if (signInButton) {
-        signInButton.addEventListener('click', () => {
-            container.classList.remove("right-panel-active");
-            console.log("hola bb 1");
-        });
-    }
-}
-const signUpButton = document.getElementById('signUp');
-const signInButton = document.getElementById('signIn');
-const container = document.getElementById('container');
-
-signUpButton.addEventListener('click', () => {
-    container.classList.add("right-panel-active");
-});
-
-signInButton.addEventListener('click', () => {
-    container.classList.remove("right-panel-active");
-});
-
-
-
-/* End of JS to implement panel  */
-/* Convert to uppercase */
+﻿
 function convertupper() {
     var x = document.getElementById("name");
     x.value = x.value.toUpperCase();
