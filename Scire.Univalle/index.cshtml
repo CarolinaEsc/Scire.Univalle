@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
 
-    System.Diagnostics.Debug.WriteLine("este es el nom"+ Session["name"]);
+    var user = Session["name"];
 }
 
 <!DOCTYPE html>
@@ -36,9 +36,11 @@
             <h1>
                 SCIRE - Univalle
             </h1>
-
             <p>
-                Por una mejor experiencia de aprendizaje
+                @user
+            </p>
+            <p>
+               ¡Te damos la bienvenida y deseamos una mejor experiencia de aprendizaje!
             </p>
 
             <button class="btn btn-dark">Conoce mas</button>
@@ -169,7 +171,7 @@
             <a href="~/loginSignup.cshtml"> login</a>
         </section>
 
-       <!-- RenderPage("_footer.cshtml") -->
+       @RenderPage("_footer.cshtml")
     </main>
     </body>
     </html>
