@@ -1,8 +1,7 @@
 ﻿@{
     Layout = null;
 
-    var user = Session["name"];
-
+    var user = "Bienvenido! " + Session["name"] + " " + Session["lastname"];
 
 }
 
@@ -41,7 +40,7 @@
             <p>
                 @user
             </p>
-            <p>
+            <p class="m-3">
                ¡Te damos la bienvenida y deseamos una mejor experiencia de aprendizaje!
             </p>
 
@@ -51,43 +50,46 @@
 
     <main>
         <section id="ourMission">
-            <div class="row">
-                <div class="col d-flex justify-content-center align-items-center flex-column p-8">
-                    <h3>Nuestra misión</h3>
-                    <p>
-                        Esperamos que su consulta o visita le ofrezca la información que precise de forma ágil y dinámica.
-                        El propósito de nuestra página Web es servir de utilidad a los alumnos/as, personal docente  y a todo aquel que quiera conocernos
-                        y se acerque a este espacio. Tenemos en cuenta sus necesidades como usuario y esperamos que encuentre toda la informacion que necesita.
-                    </p>
-                </div>
-
-                <div class="col m-2">
-                    <div class="row m-2">
-                        <div class="col me-2 image1">
-                        </div>
-                        <div class="col ms-2 image2">
-                        </div>
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-sm-6 align-items-center flex-column align-self-center">
+                        <h3>Nuestra misión</h3>
+                        <p>
+                            Esperamos que su consulta o visita le ofrezca la información que precise de forma ágil y dinámica.
+                            El propósito de nuestra página Web es servir de utilidad a los alumnos/as, personal docente  y a todo aquel que quiera conocernos
+                            y se acerque a este espacio. Tenemos en cuenta sus necesidades como usuario y esperamos que encuentre toda la informacion que necesita.
+                        </p>
                     </div>
-                    <div class="row m-2">
-                        <div class="col image3">
+
+                    <div class="col-sm-6">
+                        <div class="row m-2 ">
+                            <div class="col me-2 image1">
+                            </div>
+                            <div class="col ms-2 image2">
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col image3">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
         </section>
 
         <section id="featureUsers">
             <div class="contentUsers">
-                <header class="m-5">
-                    <h3>Usuarios destacados</h3>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                <header class="m-5 align-items-center">
+                    <h3>Páginas Relacionadas</h3>
+                    <p>Adrentate en toda la experiencia universtaria y obten toda la información que necesitas.</p>
                 </header>
 
                 <div class="row">
-                    <div class="col ms-5">
-                        <img src="~/img/rsz_user2.jpg" class="user" />
-                        <h6>Tammy Johnson</h6>
-                        <p>ISI</p>
+                    <div class="col">
+                        <img src="~/img/carreras.svg"class="user" />
+                        <h6>Información de Carreras</h6>
+                        <a href="http://www.univalle.edu/cochabamba/es/carreras-y-facultades" class="link-info"> Ingresa aquí</a>
                         <div class="social-container">
                             <a href="#" class="social">
                                 <i>
@@ -113,9 +115,9 @@
                         </div>
                     </div>
                     <div class="col ms-2 me-2">
-                        <img src="~/img/rsz_user3.jpg" class="user" />
-                        <h6>David Hackett</h6>
-                        <p>ISI</p>
+                        <img src="~/img/interaccionSocial.svg" class="user" />
+                        <h6>Interacción Social</h6>
+                        <a href="http://www.univalle.edu/cochabamba/es/interaccion-social" class="link-info">Ingresa aquí</a>
                         <div class="social-container">
                             <a href="#" class="social">
                                 <i>
@@ -141,9 +143,9 @@
                         </div>
                     </div>
                     <div class="col me-5">
-                        <img src="~/img/rsz_user4.jpg" class="user" />
-                        <h6>Pamela Wagner</h6>
-                        <p>ISI</p>
+                        <img src="~/img/postgrado.svg" class="user" />
+                        <h6>Postgrado</h6>
+                        <a href="http://www.univalle.edu/cochabamba/es/posgrado" class="link-info">Ingresa aquí</a>
                         <div class="social-container">
                             <a href="#" class="social">
                                 <i>
