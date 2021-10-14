@@ -111,6 +111,9 @@
     <Content Include="icons\twitter.png" />
     <Content Include="icons\user.png" />
     <Content Include="icons\youtube.png" />
+    <Content Include="img\postgrado.svg" />
+    <Content Include="img\interaccionSocial.svg" />
+    <Content Include="img\carreras.svg" />
     <Content Include="img\page1.jpg" />
     <Content Include="img\portait.jpg" />
     <Content Include="img\rsz_1university.jpg" />
