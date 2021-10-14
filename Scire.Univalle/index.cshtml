@@ -28,10 +28,10 @@
 </head>
 
 <body>
-
+    @RenderPage("_header.cshtml")
     <header>
 
-        @RenderPage("_header.cshtml")
+
         <div class="cover d-flex justify-content-center align-items-center flex-column">
 
             <h1>
@@ -41,7 +41,7 @@
                 @user
             </p>
             <p class="m-3">
-               ¡Te damos la bienvenida y deseamos una mejor experiencia de aprendizaje!
+                ¡Te damos la bienvenida y deseamos una mejor experiencia de aprendizaje!
             </p>
 
             <button class="btn btn-dark">Conoce mas</button>
@@ -75,7 +75,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </section>
 
         <section id="featureUsers">
@@ -87,7 +87,7 @@
 
                 <div class="row">
                     <div class="col">
-                        <img src="~/img/carreras.svg"class="user" />
+                        <img src="~/img/carreras.svg" class="user" />
                         <h6>Información de Carreras</h6>
                         <a href="http://www.univalle.edu/cochabamba/es/carreras-y-facultades" class="link-info"> Ingresa aquí</a>
                         <div class="social-container">
@@ -174,7 +174,7 @@
             </div>
         </section>
 
-       @RenderPage("_footer.cshtml")
+        @RenderPage("_footer.cshtml")
     </main>
-    </body>
+</body>
     </html>
