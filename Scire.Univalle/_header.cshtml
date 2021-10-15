@@ -1,8 +1,11 @@
 ﻿@{
-
-
+    var user = "";
+    if (Session["name"] != null) {
+        user = Session["name"] + "-" + Session["role"];
+    }
 
 }
+
 
 <!DOCTYPE html>
 
@@ -12,30 +15,16 @@
     <title></title>
     <script>
         function deleteSession() {
-           @{
-               HttpContext.Current.Session.Abandon();
-           }
-            window.location.reload(true);
+          
         }
     </script>
     <style>
         .na {
             background-color: #9e0044;
         }
-
-        #header {
-            height: 92px;
-            position: fixed;
-            left: 0;
-            top: 0;
-            right: 0;
-            transition: all 0.5s;
-            z-index: 997;
-        }
         .dropdown:hover .dropdown-menu {
             display: block;
         }
-
         .nav-tabs .dropdown-menu, .nav-pills .dropdown-menu, .navbar .dropdown-menu {
             margin-top: 0;
         }    
@@ -48,37 +37,41 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active light">
-                        <a class="nav-link light" href="#" style="color:white">Inicio</a>
+                        <a class="nav-link light" href="~/index.cshtml" style="color:white">Inicio</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" style="color:white" aria-haspopup="true" aria-expanded="false">
                             Estudiantes
                         </a>
                         <div class="dropdown-menu op" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Apuntes de estudiantes</a>
+                            <a class="dropdown-item" href="~/purposeNotes.cshtml">Apuntes de estudiantes</a>
                             <a class="dropdown-item" href="#">Option2</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Option3</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle op" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"  style="color:white" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle op" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" style="color:white" aria-haspopup="true" aria-expanded="false">
                             Materias
                         </a>
                         <div class="dropdown-menu op" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Bibliografías</a>
-                            <a class="dropdown-item" href="#">Option2</a>
+                            <a class="dropdown-item" href="~/purpose.cshtml">Bibliografías</a>
+                            <a class="dropdown-item" href="#">Opcion 2</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Option3</a>
                         </div>
                     </li>
+                    <li class="nav-item active light">
+                        <a class="nav-link light" href="~/index.cshtml" style="color:white">@user</a>
+                    </li>
                 </ul>
+
                 @if (Session["name"] != null)
                 {
-
-                    <form class="form-inline my-2 my-lg-0 me-2 ms-2" >
-                        <button class="btn btn-outline-light my-2 my-sm-0" onclick="deleteSession()">Cerrar sesion</button>
-                    </form>
+            <form class="row row-cols-lg-auto me-2 ms-2" action="~/extras/abandonSession.cshtml">
+                <button class="btn btn-outline-light my-2 my-sm-0" onclick="">Cerrar sesion</button>
+               
+            </form>
                 }
                 else
                 {
@@ -89,6 +82,8 @@
                         <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Registrarse</button>
                     </form>
                 }
+
+               
 
             </div>
         </nav>
