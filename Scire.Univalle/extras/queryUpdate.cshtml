@@ -1,0 +1,26 @@
+﻿@{
+    var db = Database.Open("connectionString");
+
+    var insertQuery = @"UPDATE Comment
+                        SET contentComment = @0
+                        WHERE idComment = @1";
+    db.Execute(insertQuery, Request.Cookies["contenUpdate"].Value, Request.Cookies["commentId"].Value);
+    Request.Cookies["commentId"].Expires = DateTime.Now.AddSeconds(-1);
+    Request.Cookies["contenUpdate"].Expires = DateTime.Now.AddSeconds(-1);
+    Response.Redirect("~/it1.cshtml");
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+    
+    </div>
+</body>
+</html>

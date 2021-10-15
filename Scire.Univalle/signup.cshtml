@@ -10,7 +10,7 @@
     var Lastname = Request.Form["lastnameUP"];
     var Password = Request.Form["passwordUP"];
     var PasswordConfirm = Request.Form["passwordConfirmUP"];
-    var message = "";
+
     if (IsPost)
     {
 
@@ -28,6 +28,13 @@
 
                         var insertQuery = "INSERT INTO Person(name, lastName, email, password, role) VALUES (@0,@1,@2, HashBytes('md5',@3),@4)";
                         db.Execute(insertQuery, Name.ToString().ToUpper(), Lastname.ToString().ToUpper(), email, PasswordConfirm, "ESTUDIANTE");
+
+                        var selectQuery = db.Query("SELECT idPerson FROM Person WHERE email='" + email + "'");
+                        List<int> userId = new List<int>();
+                        foreach(var i in selectQuery) { userId.Add(i.idPerson); }
+
+                        var insertStudentQuery = "INSERT INTO Student(idStudent, career) VALUES(@0,@1)";
+                        db.Execute(insertStudentQuery, userId[0], "ISI");
                         Response.Redirect("signin");
                     }
                     else
@@ -41,7 +48,6 @@
                 {
                     //Docente
                     var query = db.Query("SELECT email FROM Person WHERE email='" + email + "'");
-                    System.Diagnostics.Debug.WriteLine(query.Count());
                     if (query.Count() == 0)
                     {
                         var insertQuery = "INSERT INTO Person(name, lastName, email, password, role) VALUES (@0,@1,@2, HashBytes('md5',@3),@4)";
@@ -64,7 +70,7 @@
             }
             catch (Exception ex)
             {
-
+                throw ex;
             }
             finally
             {
@@ -111,7 +117,6 @@
                     <p style="margin:2px; color:red; font-weight:400">@Html.ValidationMessage("passwordConfirmUP")</p>
                     <p style="margin:2px; color:red; font-weight:400">@Html.ValidationMessage("passwordUP")</p>
                     <button type="submit" name="btnSignUp">Registrarse</button>
-                    <label>
                 </form>
             </div>
 

@@ -1,0 +1,192 @@
+﻿@{
+    Layout = "_menuPageOneLayout.cshtml";
+
+    var db = Database.Open("connectionString");
+
+    var queryNote = db.Query(@"SELECT titleNote, contentNote
+                                        FROM Note
+                                        WHERE idCourse = 2");
+
+    var queryComments = db.Query(@"SELECT Co.idCommentNote AS id, Co.contentComment AS Content, CONCAT(P.name, '', P.lastName) AS username
+                                FROM CommentNote  Co
+                                INNER JOIN Person P ON P.idPerson = Co.idPerson
+                                INNER JOIN Note N ON N.idNote = Co.idNote
+                                WHERE N.idCourse = '2' AND Co.status = 1");
+
+
+    var txtComment = Request["txtComment"];
+
+    var txtCommentUpdate = Request.Form["txtCommentUpdate"];
+
+    if (IsPost)
+    {
+        if (txtCommentUpdate != null)
+        {
+
+            var insertQuery = @"UPDATE CommentNote
+                        SET contentComment = @0
+                        WHERE idCommentNote = @1";
+            db.Execute(insertQuery, txtCommentUpdate, Request.Cookies["commentId"].Value);
+            Request.Cookies["commentId"].Expires = DateTime.Now.AddSeconds(-1);
+            Response.Redirect("ni1");
+
+        }
+        else if (txtComment != null)
+        {
+            var insertQuery = @"INSERT INTO CommentNote(contentComment, idPerson, idNote)
+              VALUES(@0, @1, @2);";
+            db.Execute(insertQuery, txtComment, Session["idUser"], 1);
+
+            Response.Redirect("ni1");
+
+        }
+    }
+
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <div>
+            @foreach (var item in queryNote)
+            {
+                <h3 class="mt-4">@item.titleNote</h3>
+                <p> @item.contentNote</p>
+            }
+        </div>
+
+        <hr class="solid me-2">
+
+        <div class="container mb-8" style="height:1000px;">
+            @if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "ESTUDIANTE")
+                {
+                    //Realizar comentarios
+                <div class="container" >
+                    <h5 class="ms-2">Mi Comentario</h5>
+                    <hr class="solid me-2">
+                    <form class="m-4" action="#" method="post">
+                        <div class="mb-3">
+                            <textarea class="form-control" id="txtComment" name="txtComment" rows="3" style="height:100px;"></textarea>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button class="btn btn-primary" type="submit">Comentar</button>
+                        </div>
+                    </form>
+                    <div class="container-fluid">
+                        <hr class="solid me-2">
+                        <h5 class="ms-2">Comentarios</h5>
+                        <hr class="solid me-2">
+                        <div class="container sm">
+                            <div class="col">
+                                @foreach (var item in queryComments)
+                                {
+                                    <div class=" row">
+                                        <div class="card m-2">
+                                            <div class="card-header">
+                                                @item.username
+                                            </div>
+
+                                            <div class="card-body">
+                                                @item.Content
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                    
+                }
+                else
+                {
+                    //Modificación y eliminación de comentarios
+                    //Mostrar solo los comentarios
+                    <h5 class="ms-2">Comentarios</h5>
+                    <hr class="solid me-2">
+                    <div class="container sm">
+                        <div class="col">
+                            @foreach (var item in queryComments)
+                            {
+                                <div class=" row">
+                                    <div class="card m-2">
+                                        <div class="card-header">
+                                            @item.username
+                                        </div>
+
+                                        <div class="card-body">
+                                            @item.Content
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                @{
+                                                    string op = Convert.ToString(item.id);
+                                                    Response.Cookies["commentId"].Value = op;
+                                                    Response.Cookies["commentId"].Expires = DateTime.Now.AddMinutes(1);
+
+
+                                                }
+                                                <form class="row row-cols-lg-auto me-2 ms-2" method="post" action="#">
+                                                    <p class="col-12">Modifica comentario:  </p>
+                                                    <div class="col-12">
+                                                        <textarea class="form-control" id="txtCommentUpdate" name="txtCommentUpdate" style="height:40px"></textarea>
+                                                    </div>
+                                                    <button class="col-12 btn btn-primary" type="submit">Modificar</button>
+                                                </form>
+
+                                                <form class="form-inline my-2 my-lg-0 me-2 ms-2" action="~/extras/deletequeryComment.cshtml">
+                                                    <button class="btn btn-primary" type="submit">Eliminar</button>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+
+                }
+            }
+            else
+            {
+                <h5 class="ms-2">Comentarios</h5>
+                <hr class="solid me-2">
+                <div class="container sm">
+                    <div class="col">
+                        @foreach (var item in queryComments)
+                        {
+                            <div class=" row">
+                                <div class="card m-2">
+                                    <div class="card-header">
+                                        @item.username
+                                    </div>
+
+                                    <div class="card-body">
+                                        @item.Content
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+                    @*//Mostrar solo los comentarios*@
+                </div>
+            }
+        </div>
+
+
+    </div>
+</body>
+</html>

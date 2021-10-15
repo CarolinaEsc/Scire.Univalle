@@ -102,9 +102,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\bibliography.css" />
     <Content Include="css\login.css" />
     <Content Include="css\footer.css" />
     <Content Include="css\homePage.css" />
+    <Content Include="css\menuLateral.css" />
     <Content Include="icons\facebook.png" />
     <Content Include="icons\github.png" />
     <Content Include="icons\linkedin.png" />
@@ -123,6 +125,7 @@
     <Content Include="img\rsz_user3.jpg" />
     <Content Include="img\rsz_user4.jpg" />
     <Content Include="js\loginScript.js" />
+    <Content Include="js\menuScript.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -130,9 +133,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.cshtml" />
+    <Content Include="howContribute.cshtml" />
+    <Content Include="it1.cshtml" />
+    <Content Include="extras\abandonSession.cshtml" />
+    <Content Include="extras\queryUpdate.cshtml" />
+    <Content Include="ni1.cshtml" />
+    <Content Include="extras\deletequeryComment.cshtml" />
     <None Include="packages.config" />
     <Content Include="signup.cshtml" />
     <Content Include="signin.cshtml" />
+    <Content Include="purpose.cshtml" />
+    <Content Include="purposeNotes.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -141,6 +152,9 @@
     </None>
     <Content Include="_footer.cshtml" />
     <Content Include="_header.cshtml" />
+    <Content Include="_menuPageTwoLayout.cshtml" />
+    <Content Include="extras\queryDelete.cshtml" />
+    <Content Include="_menuPageOneLayout.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

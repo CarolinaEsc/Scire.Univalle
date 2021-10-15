@@ -15,6 +15,16 @@ h6 {
     padding: 0;
 }
 
+#header {
+    height: 92px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    transition: all 0.5s;
+    z-index: 997;
+}
+
 .cover {
     height: 500px;
     background-image: url(../img/page1.jpg);

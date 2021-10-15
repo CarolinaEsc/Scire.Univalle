@@ -13,24 +13,24 @@
         {
             var db = Database.Open("connectionString");
 
-            var query = db.Query("SELECT name, lastname, role, email, [password] FROM Person WHERE email='" + emailIn + "' AND [password] = HashBytes('md5','" + Password + "')");
-            List<string> user = new List<string>();
+            var query = db.Query("SELECT idPerson, name, lastname, role, email, [password] FROM Person WHERE email='" + emailIn + "' AND [password] = HashBytes('md5','" + Password + "')");
+            List<object> user = new List<object>();
             foreach (var u in query)
             {
                 user.Add(u.name);
                 user.Add(u.lastname);
                 user.Add(u.role);
                 user.Add(u.email);
+                user.Add(u.idPerson);
             }
 
             if (query.Count() > 0)
             {
-
-                System.Diagnostics.Debug.WriteLine("aqui");
                 Session.Add("name", user[0]);
                 Session.Add("lastname", user[1]);
                 Session.Add("role", user[2]);
                 Session.Add("email", user[3]);
+                Session.Add("idUser", user[4]);
                 Response.Redirect("index");
             }
             else
